@@ -37,7 +37,7 @@ export default function Home() {
         </div>
         <div className="flex flex-col place-items-start p-1">
           <div className='p-2 text-justify'>
-            {summary.map(s=><div className='mt-2'>{s}</div>)}
+            {summary.map((s, index)=><div className='mt-2'key={index}>{s}</div>)}
           </div>
           <div className='mt-10'>
             <div className='font-bold text-xl text-primary dark:text-primary-dark'>

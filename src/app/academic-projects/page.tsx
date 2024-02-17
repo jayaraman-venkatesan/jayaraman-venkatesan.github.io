@@ -37,7 +37,7 @@ export default function AcademicProjects() {
                             <div className="flex">
                                 {learnMoreLinks.map(({ title, link }, index) => <div key={index}>
                                     <a key={index} href={link} target="_blank" className='mt-4 mr-2 flex font-bold rounded p-2 border-2 border-solid border-primary text-primary dark:border-primary-dark'>
-                                        {title + ' '} <img src="images/link.svg" height={20} width={20} className="px-1"></img>
+                                        {title + ' '} <Image alt="Link" src="images/link.svg" height={20} width={20} className="px-1"></Image>
                                     </a>
                                 </div>)}
                             </div>
