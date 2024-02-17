@@ -30,16 +30,16 @@ export default function AcademicProjects() {
             </div>
             <div className="sm:p-5 flex flex-wrap">
                 {
-                    workData.map(({ heading, summary, learnMoreLinks = [] }) => (
-                        <div className="w-5/12 p-5 text-justify border-2 border-solid border-gray-200 dark:border-gray-700 rounded-lg bg-slate-200 dark:bg-slate-800 m-6">
+                    workData.map(({ heading, summary, learnMoreLinks = [] }, index) => (
+                        <div key={index} className="w-5/12 p-5 text-justify border-2 border-solid border-gray-200 dark:border-gray-700 rounded-lg bg-slate-200 dark:bg-slate-800 m-6">
                             <div className="font-bold text-lg py-2">{heading}</div>
                             <div className="">{summary}</div>
                             <div className="flex">
-                            {learnMoreLinks.map(({ title, link }, index) => <div key={index}>
-                                <a href={link} target="_blank" className='mt-4 mr-2 flex font-bold rounded p-2 border-2 border-solid border-primary text-primary dark:border-primary-dark'>
-                                    {title + ' '} <img src="images/link.svg" height={20} width={20} className="px-1"></img>
-                                </a>
-                            </div>)}
+                                {learnMoreLinks.map(({ title, link }, index) => <div key={index}>
+                                    <a href={link} target="_blank" className='mt-4 mr-2 flex font-bold rounded p-2 border-2 border-solid border-primary text-primary dark:border-primary-dark'>
+                                        {title + ' '} <img src="images/link.svg" height={20} width={20} className="px-1"></img>
+                                    </a>
+                                </div>)}
                             </div>
                         </div>
                     ))
