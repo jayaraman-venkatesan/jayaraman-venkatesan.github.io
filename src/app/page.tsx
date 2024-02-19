@@ -20,10 +20,10 @@ export default function Home() {
                 cursor={false}
                 sequence={[
                   // Same substring at the start will only be typed out once, initially
-                  'FRONTEND DEVELOPER',
-                  1000, // wait 1s before replacing "Mice" with "Hamsters"
-                  'BACKEND DEVELOPER',
-                  1000,
+                  // 'FRONTEND DEVELOPER',
+                  // 1000, // wait 1s before replacing "Mice" with "Hamsters"
+                  // 'BACKEND DEVELOPER',
+                  // 1000,
                   'FULLSTACK DEVELOPER',
                   1000,
                 ]}
