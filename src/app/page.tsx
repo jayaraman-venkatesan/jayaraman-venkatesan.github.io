@@ -64,12 +64,11 @@ export default function Home() {
       </div>
       <div className="flex lg:w-2/4 bg-blackh-full items-center justify-center bg-gradient-to-r bg-black-950 main-laptop-image">
         <Image
-          src="images/2935139d7d9983216af793ef653901c3-removebg.png"
+          src="images/my-pic.jpeg"
           alt="Jayaraman Venkatesan"
-          width="0"
-          height="0"
-          sizes="1000vw"
-          className="w-auto h-auto"
+          width={500} // Set desired width
+          height={500} // Set desired height
+          className="max-w-full max-h-full rounded-full object-contain"
           priority
         />
       </div>
