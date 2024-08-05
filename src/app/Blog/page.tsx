@@ -1,9 +1,10 @@
 "use client";
-import React, { useState } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import Image from "next/image";
 import { blogData } from "../data/blog";
 import "./page.css";
 
+// Custom StarRating Component
 function StarRating({ rating }: { rating: number }) {
   // Array to hold the star values
   const stars = Array.from({ length: 5 }, (_, i) => i + 1);
@@ -36,6 +37,8 @@ export default function Blog() {
   const [selectedTags, setSelectedTags] = useState<string[]>([]);
   const [dropdownOpen, setDropdownOpen] = useState(false);
 
+  const dropdownRef = useRef<HTMLDivElement | null>(null); // Reference to the dropdown
+
   // Extract unique tags from blogData
   const allTags = Array.from(new Set(blogData.flatMap((post) => post.tags)));
 
@@ -54,6 +57,25 @@ export default function Blog() {
       selectedTags.length === 0 ||
       post.tags.some((tag) => selectedTags.includes(tag))
   );
+
+  // Close dropdown if click is outside
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      if (
+        dropdownRef.current &&
+        !dropdownRef.current.contains(event.target as Node)
+      ) {
+        setDropdownOpen(false);
+      }
+    };
+
+    // Add event listener
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => {
+      // Cleanup event listener on unmount
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, []);
 
   return (
     <main className="flex flex-col items-start p-5 sm:py-5 sm:px-10 w-full">
@@ -83,7 +105,7 @@ export default function Blog() {
       </h1>
 
       {/* Tag Dropdown Filter */}
-      <div className="relative my-4">
+      <div className="relative my-4" ref={dropdownRef}>
         <button
           onClick={() => setDropdownOpen((prev) => !prev)}
           className="bg-gray-200 dark:bg-gray-800 text-gray-700 dark:text-gray-300 p-2 rounded"
