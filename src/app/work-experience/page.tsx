@@ -7,7 +7,7 @@ export default function WorkExperience() {
 
     return (
         <main className="flex flex-col items-start p-5 sm:py-5 sm:px-10 w-full">
-            <div className="z-10 max-w-5xl w-full text-sm">
+            <div className="max-w-5xl w-full text-sm">
                 <div className="flex items-center text-3xl font-bold pb-5 lg:py-5 text-slate-700 dark:text-white">
                     <div className="mr-5">
                         Professional Odyssey
