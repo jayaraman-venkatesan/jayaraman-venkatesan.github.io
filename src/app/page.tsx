@@ -15,14 +15,9 @@ export default function Home() {
               I&apos;M JAYARAMAN VENKATESAN!
             </div>
             <div className="font-semibold text-primary dark:text-primary-dark break-words">
-              <TypeAnimation
-                cursor={false}
-                sequence={["Software Engineer", 1000]}
-                wrapper="div"
-                speed={50}
-                style={{ fontSize: "2em", display: "inline-block" }}
-                repeat={0}
-              />
+              <div style={{ fontSize: "2em", display: "inline-block" }}>
+                Software Engineer
+              </div>
             </div>
           </div>
         </div>
@@ -64,12 +59,11 @@ export default function Home() {
       </div>
       <div className="flex lg:w-2/4 bg-blackh-full items-center justify-center bg-gradient-to-r bg-black-950 main-laptop-image">
         <Image
-          src="images/2935139d7d9983216af793ef653901c3-removebg.png"
+          src="images/my-pic.jpeg"
           alt="Jayaraman Venkatesan"
-          width="0"
-          height="0"
-          sizes="1000vw"
-          className="w-auto h-auto"
+          width={500} // Set desired width
+          height={500} // Set desired height
+          className="max-w-full max-h-full rounded-full object-contain"
           priority
         />
       </div>

@@ -85,7 +85,7 @@ function TimelineBlock({
               data.skills.map((skill, index) => (
                 <div
                   key={index}
-                  className="text-sm p-1 px-2 bg-white border border-slate-300 m-1 rounded text-slate-600 dark:text-slate-600"
+                  className="text-sm p-1 px-2 bg-white border border-slate-300 m-1 rounded text-slate-600 dark:bg-slate-700 dark:text-slate-300"
                 >
                   {skill}
                 </div>

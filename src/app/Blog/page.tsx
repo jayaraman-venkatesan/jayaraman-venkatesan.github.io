@@ -153,6 +153,49 @@ const Modal = ({ heading, summary, tags, rating, learnMoreLinks,  setSelectedBlo
 
 export default function Blog() {
   const [selectedBlogIndex, setSelectedBlogIndex] = useState<number|null>(null)
+  const [selectedTags, setSelectedTags] = useState<string[]>([]);
+  const [dropdownOpen, setDropdownOpen] = useState(false);
+
+  const dropdownRef = useRef<HTMLDivElement | null>(null); // Reference to the dropdown
+
+  // Extract unique tags from blogData
+  const allTags = Array.from(new Set(blogs.flatMap((post) => post.tags)));
+
+  // Toggle the selected state of a tag
+  const toggleTag = (tag: string) => {
+    setSelectedTags((prevTags) =>
+      prevTags.includes(tag)
+        ? prevTags.filter((t) => t !== tag)
+        : [...prevTags, tag]
+    );
+  };
+
+  // Filter blogData based on selectedTags
+  const filteredBlogData = blogs.filter(
+    (post) =>
+      selectedTags.length === 0 ||
+      post.tags.some((tag) => selectedTags.includes(tag))
+  );
+
+  // Close dropdown if click is outside
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      if (
+        dropdownRef.current &&
+        !dropdownRef.current.contains(event.target as Node)
+      ) {
+        setDropdownOpen(false);
+      }
+    };
+
+    // Add event listener
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => {
+      // Cleanup event listener on unmount
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, []);
+
   return (
     <main className="flex flex-col items-start p-5 sm:py-5 sm:px-10 w-full">
       <div className="max-w-5xl w-full text-sm">
@@ -176,12 +219,43 @@ export default function Blog() {
         </div>
       </div>
       <h1>
-        This page is just a dump of everything that I want to share to the
+        This page is just a dump of everything that I want to share with the
         world. I will post things that made me learn something new, things that
         changed my perspective, things that I found interesting, etc.
       </h1>
-      <div className="py-5 flex flex-wrap">
-        {blogs.map(
+
+      {/* Tag Dropdown Filter */}
+      <div className="relative my-4" ref={dropdownRef}>
+        <button
+          onClick={() => setDropdownOpen((prev) => !prev)}
+          className="bg-gray-200 dark:bg-gray-800 text-gray-700 dark:text-gray-300 p-2 rounded"
+        >
+          {selectedTags.length > 0
+            ? `Selected Tags: ${selectedTags.join(", ")}`
+            : "Select Tags"}
+          <span className="ml-2">&#9660;</span>
+        </button>
+        {dropdownOpen && (
+          <div className="absolute mt-2 w-full bg-white dark:bg-gray-900 border border-gray-300 dark:border-gray-700 rounded shadow-md z-10">
+            {allTags.map((tag) => (
+              <div key={tag} className="p-2">
+                <label className="flex items-center">
+                  <input
+                    type="checkbox"
+                    checked={selectedTags.includes(tag)}
+                    onChange={() => toggleTag(tag)}
+                    className="mr-2"
+                  />
+                  {tag}
+                </label>
+              </div>
+            ))}
+          </div>
+        )}
+      </div>
+
+      <div className="sm:p-5 flex flex-wrap">
+        {filteredBlogData.map(
           (
             blog,
             index_w

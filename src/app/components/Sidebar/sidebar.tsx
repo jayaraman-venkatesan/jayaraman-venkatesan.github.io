@@ -10,6 +10,11 @@ export default function SideBar() {
     <div className="flex w-full lg:w-fit lg:flex-col items-start justify-start sm:justify-between p-5 lg:px-10 lg:pb-10 lg:justify-center">
       <CustomLink isActive={pathname === "/"} text="Home" linkPath="/" />
       <CustomLink
+        isActive={pathname === "/Blog"}
+        text="Blog"
+        linkPath="/Blog"
+      />
+      <CustomLink
         isActive={pathname === "/education"}
         text="Education"
         linkPath="/education"
@@ -23,11 +28,6 @@ export default function SideBar() {
         isActive={pathname === "/academic-projects"}
         text="Projects"
         linkPath="/academic-projects"
-      />
-      <CustomLink
-        isActive={pathname === "/Blog"}
-        text="Blog"
-        linkPath="/Blog"
       />
     </div>
   );
