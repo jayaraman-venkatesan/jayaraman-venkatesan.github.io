@@ -15,14 +15,9 @@ export default function Home() {
               I&apos;M JAYARAMAN VENKATESAN!
             </div>
             <div className="font-semibold text-primary dark:text-primary-dark break-words">
-              <TypeAnimation
-                cursor={false}
-                sequence={["Software Engineer", 1000]}
-                wrapper="div"
-                speed={50}
-                style={{ fontSize: "2em", display: "inline-block" }}
-                repeat={0}
-              />
+              <div style={{ fontSize: "2em", display: "inline-block" }}>
+                Software Engineer
+              </div>
             </div>
           </div>
         </div>
