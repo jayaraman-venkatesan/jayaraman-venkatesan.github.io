@@ -41,12 +41,12 @@ interface IModal {
   tags: string[]
   rating: number
   learnMoreLinks: { title: string, link: string }[]
-  setSelectedBlogIndex: (index?:number|null)=>void
+  setSelectedBlogIndex: (index:number|null)=>void
 }
 
 const Modal = ({ heading, summary, tags, rating, learnMoreLinks,  setSelectedBlogIndex}: IModal) => {
   const [isOpen, setIsOpen] = useState(true)
-  const modalRef = useRef(null);
+  const modalRef = useRef<HTMLDivElement | null>(null);
   useEffect(() => {
     if (isOpen) {
       // Prevent background scrolling
@@ -64,8 +64,8 @@ const Modal = ({ heading, summary, tags, rating, learnMoreLinks,  setSelectedBlo
 
   useEffect(() => {
     // Click outside modal handler
-    const handleClickOutside = (event) => {
-      if (modalRef.current && !modalRef.current.contains(event.target)) {
+    const handleClickOutside = (event:MouseEvent) => {
+      if (modalRef.current && !modalRef.current.contains(event.target as Node)) {
         setIsOpen(false);
       }
     };
@@ -106,7 +106,7 @@ const Modal = ({ heading, summary, tags, rating, learnMoreLinks,  setSelectedBlo
                 />
               </button>
             </div>
-            <div className="p-2 overflow-y-auto overflow-x-hidden max-h-96 text-slate-600 dark:bg-slate-700 dark:text-slate-300">{summary}</div>
+            <div className="p-2 overflow-y-auto overflow-x-hidden h-3/5 max-h-96 text-slate-600 dark:bg-slate-700 dark:text-slate-300">{summary}</div>
             {/* Display tags */}
             <div className="flex flex-wrap mt-4">
               {tags.map((tag, index) => (
@@ -266,7 +266,7 @@ export default function Blog() {
             >
               <div className="font-bold text-lg py-2">{blog.heading}</div>
               <div className="line-clamp-6 text-left">{summary}</div>
-              {selectedBlogIndex==index_w && <Modal heading={blog.heading} summary={blog.summary} tags={blog.tags} rating={blog.rating} learnMoreLinks={blog.learnMoreLinks} setSelectedBlogIndex={setSelectedBlogIndex} />}
+              {selectedBlogIndex==index_w && <Modal heading={blog.heading} summary={blog.summary} tags={blog.tags} rating={blog.rating} learnMoreLinks={blog.learnMoreLinks} setSelectedBlogIndex={(i)=>setSelectedBlogIndex(i)} />}
               <button
                 onClick={() => {setSelectedBlogIndex(index_w)}}
                 className="text-primary mt-2"
