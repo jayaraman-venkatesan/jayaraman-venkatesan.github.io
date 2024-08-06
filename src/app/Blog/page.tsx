@@ -41,14 +41,15 @@ interface IModal {
   tags: string[]
   rating: number
   learnMoreLinks: { title: string, link: string }[]
+  selectedBlogIndex: number|null
   setSelectedBlogIndex: (index:number|null)=>void
 }
 
-const Modal = ({ heading, summary, tags, rating, learnMoreLinks,  setSelectedBlogIndex}: IModal) => {
+const Modal = ({ heading, summary, tags, rating, learnMoreLinks,  setSelectedBlogIndex, selectedBlogIndex}: IModal) => {
   const [isOpen, setIsOpen] = useState(true)
   const modalRef = useRef<HTMLDivElement | null>(null);
   useEffect(() => {
-    if (isOpen) {
+    if (selectedBlogIndex!=null) {
       // Prevent background scrolling
       document.body.style.overflow = 'hidden';
     } else {
@@ -60,7 +61,7 @@ const Modal = ({ heading, summary, tags, rating, learnMoreLinks,  setSelectedBlo
     return () => {
       document.body.style.overflow = '';
     };
-  }, [isOpen]);
+  }, [selectedBlogIndex]);
 
   useEffect(() => {
     // Click outside modal handler
@@ -70,7 +71,7 @@ const Modal = ({ heading, summary, tags, rating, learnMoreLinks,  setSelectedBlo
       }
     };
 
-    if (isOpen) {
+    if (selectedBlogIndex!=null) {
       document.addEventListener('mousedown', handleClickOutside);
     } else {
       document.removeEventListener('mousedown', handleClickOutside);
@@ -80,7 +81,7 @@ const Modal = ({ heading, summary, tags, rating, learnMoreLinks,  setSelectedBlo
     return () => {
       document.removeEventListener('mousedown', handleClickOutside);
     };
-  }, [isOpen]);
+  }, [selectedBlogIndex]);
 
 
   return (
@@ -266,7 +267,7 @@ export default function Blog() {
             >
               <div className="font-bold text-lg py-2">{blog.heading}</div>
               <div className="line-clamp-6 text-left">{summary}</div>
-              {selectedBlogIndex==index_w && <Modal heading={blog.heading} summary={blog.summary} tags={blog.tags} rating={blog.rating} learnMoreLinks={blog.learnMoreLinks} setSelectedBlogIndex={(i)=>setSelectedBlogIndex(i)} />}
+              {selectedBlogIndex==index_w && <Modal selectedBlogIndex={selectedBlogIndex} heading={blog.heading} summary={blog.summary} tags={blog.tags} rating={blog.rating} learnMoreLinks={blog.learnMoreLinks} setSelectedBlogIndex={(i)=>setSelectedBlogIndex(i)} />}
               <button
                 onClick={() => {setSelectedBlogIndex(index_w)}}
                 className="text-primary mt-2"
