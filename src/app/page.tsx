@@ -19,15 +19,37 @@ export default function Home() {
                 Software Engineer
               </div>
             </div>
+            <div className="mt-4 text-lg text-slate-700 dark:text-slate-300">
+              Hey there! I'm Jayaraman Venkatesan, a Software Engineer and
+              perpetual learner. I’ve recently completed my Master of Science in
+              Computer Science at Northeastern University in the vibrant city of
+              Boston, Massachusetts.
+            </div>
           </div>
         </div>
         <div className="flex flex-col place-items-start p-1">
           <div className="p-2 text-justify">
-            {summary.map((s, index) => (
+            <div className="font-semibold text-primary dark:text-primary-dark break-words">
+              <div
+                style={{
+                  fontSize: "2em",
+                  lineHeight: "1.2",
+                  display: "inline-block",
+                  textAlign: "center",
+                  margin: "20px 0",
+                }}
+              >
+                <h1 className="animate-fade">I like to code</h1>
+                <h1 className="animate-fade">I like to learn new things</h1>
+                <h1 className="animate-fade">I read books</h1>
+              </div>
+            </div>
+
+            {/* {summary.map((s, index) => (
               <div className="mt-2" key={index}>
                 {s}
               </div>
-            ))}
+            ))} */}
           </div>
           <div className="mt-10">
             <div className="font-bold text-xl text-primary dark:text-primary-dark">

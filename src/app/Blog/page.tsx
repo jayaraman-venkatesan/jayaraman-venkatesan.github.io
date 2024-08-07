@@ -244,7 +244,7 @@ export default function Blog() {
       <h1>
         This page is just a dump of everything that I want to share with the
         world. I will post things that made me learn something new, things that
-        changed my perspective, things that I found interesting, etc.
+        changed my perspective, things that I find interesting, etc.
       </h1>
 
       {/* Tag Dropdown Filter */}
@@ -283,7 +283,9 @@ export default function Blog() {
             key={index_w}
             className="w-5/12 p-5 text-justify border-2 border-solid border-gray-200 dark:border-gray-700 rounded-lg bg-slate-200 dark:bg-slate-800 my-6 mr-6"
           >
-            <div className="font-bold text-lg py-2">{blog.heading}</div>
+            <div className="font-bold text-lg py-2 text-left">
+              {blog.heading}
+            </div>
             <div className="line-clamp-6 text-left">{blog.preview}</div>
             {selectedBlogIndex == index_w && (
               <Modal
