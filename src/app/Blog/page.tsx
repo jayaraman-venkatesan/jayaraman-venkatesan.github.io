@@ -121,7 +121,10 @@ const Modal = ({
               </button>
             </div>
             {summary.map((para, index) => (
-              <div className="p-2 overflow-y-auto overflow-x-hidden h-3/5 max-h-96 text-slate-600 dark:bg-slate-700 dark:text-slate-300">
+              <div
+                key={index}
+                className="p-2 overflow-y-auto overflow-x-hidden h-3/5 max-h-96 text-slate-600 dark:bg-slate-700 dark:text-slate-300"
+              >
                 {para}
               </div>
             ))}
