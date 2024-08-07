@@ -1,10 +1,10 @@
-"use client"
+"use client";
 
 import React, { useEffect, useRef, useState } from "react";
 import Image from "next/image";
 import { blogs } from "../data/blog";
 import "./page.css";
-import { summary } from '../data/home';
+import { summary } from "../data/home";
 
 // Custom StarRating Component
 function StarRating({ rating }: { rating: number }) {
@@ -36,53 +36,63 @@ function StarRating({ rating }: { rating: number }) {
 }
 
 interface IModal {
-  heading: string
-  summary: string
-  tags: string[]
-  rating: number
-  learnMoreLinks: { title: string, link: string }[]
-  selectedBlogIndex: number|null
-  setSelectedBlogIndex: (index:number|null)=>void
+  heading: string;
+  summary: string[];
+  tags: string[];
+  rating: number;
+  learnMoreLinks: { title: string; link: string }[];
+  selectedBlogIndex: number | null;
+  setSelectedBlogIndex: (index: number | null) => void;
 }
 
-const Modal = ({ heading, summary, tags, rating, learnMoreLinks,  setSelectedBlogIndex, selectedBlogIndex}: IModal) => {
-  const [isOpen, setIsOpen] = useState(true)
+const Modal = ({
+  heading,
+  summary,
+  tags,
+  rating,
+  learnMoreLinks,
+  setSelectedBlogIndex,
+  selectedBlogIndex,
+}: IModal) => {
+  const [isOpen, setIsOpen] = useState(true);
   const modalRef = useRef<HTMLDivElement | null>(null);
   useEffect(() => {
-    if (selectedBlogIndex!=null) {
+    if (selectedBlogIndex != null) {
       // Prevent background scrolling
-      document.body.style.overflow = 'hidden';
+      document.body.style.overflow = "hidden";
     } else {
       // Allow background scrolling
-      document.body.style.overflow = '';
+      document.body.style.overflow = "";
     }
 
     // Cleanup function to reset overflow style
     return () => {
-      document.body.style.overflow = '';
+      document.body.style.overflow = "";
     };
   }, [selectedBlogIndex]);
 
   useEffect(() => {
     // Click outside modal handler
-    const handleClickOutside = (event:MouseEvent) => {
-      if (modalRef.current && !modalRef.current.contains(event.target as Node)) {
+    const handleClickOutside = (event: MouseEvent) => {
+      if (
+        modalRef.current &&
+        !modalRef.current.contains(event.target as Node)
+      ) {
         setIsOpen(false);
       }
     };
 
-    if (selectedBlogIndex!=null) {
-      document.addEventListener('mousedown', handleClickOutside);
+    if (selectedBlogIndex != null) {
+      document.addEventListener("mousedown", handleClickOutside);
     } else {
-      document.removeEventListener('mousedown', handleClickOutside);
+      document.removeEventListener("mousedown", handleClickOutside);
     }
 
     // Cleanup event listener on component unmount or modal close
     return () => {
-      document.removeEventListener('mousedown', handleClickOutside);
+      document.removeEventListener("mousedown", handleClickOutside);
     };
   }, [selectedBlogIndex]);
-
 
   return (
     <div>
@@ -96,18 +106,26 @@ const Modal = ({ heading, summary, tags, rating, learnMoreLinks,  setSelectedBlo
               <div className="font-bold text-lg p-2">{heading}</div>
               <button
                 className="text-gray-500 hover:text-gray-700 w-5 h-5"
-                onClick={() => {setIsOpen(false);setSelectedBlogIndex(null)}}
+                onClick={() => {
+                  setIsOpen(false);
+                  setSelectedBlogIndex(null);
+                }}
               >
                 <Image
                   width={35}
                   height={35}
                   src={"images/close-icon.svg"}
-                  alt='Close'
+                  alt="Close"
                   className="w-10 h-10"
                 />
               </button>
             </div>
-            <div className="p-2 overflow-y-auto overflow-x-hidden h-3/5 max-h-96 text-slate-600 dark:bg-slate-700 dark:text-slate-300">{summary}</div>
+            {summary.map((para, index) => (
+              <div className="p-2 overflow-y-auto overflow-x-hidden h-3/5 max-h-96 text-slate-600 dark:bg-slate-700 dark:text-slate-300">
+                {para}
+              </div>
+            ))}
+
             {/* Display tags */}
             <div className="flex flex-wrap mt-4">
               {tags.map((tag, index) => (
@@ -149,11 +167,12 @@ const Modal = ({ heading, summary, tags, rating, learnMoreLinks,  setSelectedBlo
       )}
     </div>
   );
-}
-
+};
 
 export default function Blog() {
-  const [selectedBlogIndex, setSelectedBlogIndex] = useState<number|null>(null)
+  const [selectedBlogIndex, setSelectedBlogIndex] = useState<number | null>(
+    null
+  );
   const [selectedTags, setSelectedTags] = useState<string[]>([]);
   const [dropdownOpen, setDropdownOpen] = useState(false);
 
@@ -256,64 +275,70 @@ export default function Blog() {
       </div>
 
       <div className="sm:p-5 flex flex-wrap">
-        {filteredBlogData.map(
-          (
-            blog,
-            index_w
-          ) => (
-            <div
-              key={index_w}
-              className="w-5/12 p-5 text-justify border-2 border-solid border-gray-200 dark:border-gray-700 rounded-lg bg-slate-200 dark:bg-slate-800 my-6 mr-6"
+        {filteredBlogData.map((blog, index_w) => (
+          <div
+            key={index_w}
+            className="w-5/12 p-5 text-justify border-2 border-solid border-gray-200 dark:border-gray-700 rounded-lg bg-slate-200 dark:bg-slate-800 my-6 mr-6"
+          >
+            <div className="font-bold text-lg py-2">{blog.heading}</div>
+            <div className="line-clamp-6 text-left">{blog.preview}</div>
+            {selectedBlogIndex == index_w && (
+              <Modal
+                selectedBlogIndex={selectedBlogIndex}
+                heading={blog.heading}
+                summary={blog.summary}
+                tags={blog.tags}
+                rating={blog.rating}
+                learnMoreLinks={blog.learnMoreLinks}
+                setSelectedBlogIndex={(i) => setSelectedBlogIndex(i)}
+              />
+            )}
+            <button
+              onClick={() => {
+                setSelectedBlogIndex(index_w);
+              }}
+              className="text-primary mt-2"
             >
-              <div className="font-bold text-lg py-2">{blog.heading}</div>
-              <div className="line-clamp-6 text-left">{summary}</div>
-              {selectedBlogIndex==index_w && <Modal selectedBlogIndex={selectedBlogIndex} heading={blog.heading} summary={blog.summary} tags={blog.tags} rating={blog.rating} learnMoreLinks={blog.learnMoreLinks} setSelectedBlogIndex={(i)=>setSelectedBlogIndex(i)} />}
-              <button
-                onClick={() => {setSelectedBlogIndex(index_w)}}
-                className="text-primary mt-2"
-              >
-                Read more
-              </button>
-              {/* Display tags */}
-              <div className="flex flex-wrap mt-4">
-                {blog.tags.slice(-3).map((tag, index) => (
-                  <div
-                    key={index}
-                    className="text-sm p-1 px-2 bg-white border border-slate-300 m-1 rounded text-slate-600 dark:bg-slate-700 dark:text-slate-300"
-                  >
-                    {tag}
-                  </div>
-                ))}
-              </div>
-              {/* Display rating */}
-
-              {blog.rating > 0 && <StarRating rating={blog.rating} />}
-
-              <div className="flex">
-                {blog.learnMoreLinks.map(({ title, link }, index) => (
-                  <div key={index}>
-                    <a
-                      key={index}
-                      href={link}
-                      target="_blank"
-                      className="mt-4 mr-2 flex font-bold rounded p-2 border-2 border-solid border-primary text-primary dark:border-primary-dark"
-                    >
-                      {title + " "}{" "}
-                      <Image
-                        alt="Link"
-                        src="images/link.svg"
-                        height={20}
-                        width={20}
-                        className="px-1"
-                      ></Image>
-                    </a>
-                  </div>
-                ))}
-              </div>
-
+              Read more
+            </button>
+            {/* Display tags */}
+            <div className="flex flex-wrap mt-4">
+              {blog.tags.slice(-3).map((tag, index) => (
+                <div
+                  key={index}
+                  className="text-sm p-1 px-2 bg-white border border-slate-300 m-1 rounded text-slate-600 dark:bg-slate-700 dark:text-slate-300"
+                >
+                  {tag}
+                </div>
+              ))}
             </div>
-          )
-        )}
+            {/* Display rating */}
+
+            {blog.rating > 0 && <StarRating rating={blog.rating} />}
+
+            <div className="flex">
+              {blog.learnMoreLinks.map(({ title, link }, index) => (
+                <div key={index}>
+                  <a
+                    key={index}
+                    href={link}
+                    target="_blank"
+                    className="mt-4 mr-2 flex font-bold rounded p-2 border-2 border-solid border-primary text-primary dark:border-primary-dark"
+                  >
+                    {title + " "}{" "}
+                    <Image
+                      alt="Link"
+                      src="images/link.svg"
+                      height={20}
+                      width={20}
+                      className="px-1"
+                    ></Image>
+                  </a>
+                </div>
+              ))}
+            </div>
+          </div>
+        ))}
       </div>
     </main>
   );
