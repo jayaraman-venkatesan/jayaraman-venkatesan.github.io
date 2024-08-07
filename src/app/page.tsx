@@ -20,10 +20,10 @@ export default function Home() {
               </div>
             </div>
             <div className="mt-4 text-lg text-slate-700 dark:text-slate-300">
-              Hey there! I'm Jayaraman Venkatesan, a Software Engineer and
-              perpetual learner. I’ve recently completed my Master of Science in
-              Computer Science at Northeastern University in the vibrant city of
-              Boston, Massachusetts.
+              Hey there! I&apos;m Jayaraman Venkatesan, a Software Engineer and
+              perpetual learner. I&apos;ve recently completed my Master of
+              Science in Computer Science at Northeastern University in the
+              vibrant city of Boston, Massachusetts.
             </div>
           </div>
         </div>
