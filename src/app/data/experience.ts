@@ -2,6 +2,35 @@ import { ITimeline } from "../types";
 
 export const workData: ITimeline[] = [
   {
+    duration: "Sept 2024 - Present",
+    heading: "United Wholesale Mortgage",
+    subHeading: "Software Developer - III",
+    location: "Troy, USA",
+    summary: [
+      "Designed a feature flag–enabled payment service using Stripe APIs, supporting 4–5K transactions/day ( $10M/month)with pluggable vendor abstraction for seamless provider migration",
+      "Developed a global edge authentication system to unify API authentication and authorization across the enterprise,replacing fragmented, service-specific auth implementations.",
+      "Built a high-throughput .NET Core authentication service, combining Cosmos DB–backed identity persistence and a reusable authorization SDK to standardize authorization enforcement and eliminate duplicated security logic across services",
+      "Led the v2 to v3 modernization of a critical service, migrating from .NET Framework to .NET Core, containerizing with Docker, and deploying to Kubernetes to replace IIS app pools, improving scalability, reliability, and deployment consistency.",
+    ],
+    contentImagePath: "",
+    contentImageSize: 150,
+    skills: [
+      ".NET",
+      "Kubernetes",
+      "Docker",
+      "C#",
+      "SQL",
+      "SqlServer",
+      "DGraph",
+      "Git",
+      "BitBucket",
+      "GitHub",
+      "Apache Kafka",
+      "Redis",
+    ],
+  },
+  
+  {
     duration: "May 2024 - Present",
     heading: "Flagstar Bank",
     subHeading: "Software Developer",
