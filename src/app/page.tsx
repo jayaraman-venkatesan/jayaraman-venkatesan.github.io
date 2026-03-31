@@ -70,7 +70,7 @@ export default function Home() {
           <div className="mt-10 flex items-center justify-end w-full">
             <div className="">Want to know more?</div>
             <a
-              href="/resume.pdf"
+              href="/Jayaram_resume.pdf"
               target="_blank"
               className="font-bold rounded p-2 ml-2 border-2 border-solid border-indigo-600 text-indigo-600 dark:border-indigo-300 dark:text-indigo-300"
             >
